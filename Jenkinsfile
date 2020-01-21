@@ -62,8 +62,8 @@ pipeline
 				rtMavenDeployer (
                     id: 'deployer',
                     serverId: '123456789@artifactory',
-                    releaseRepo: 'sureshkansujiya',
-                    snapshotRepo: 'sureshkansujiya'
+                    releaseRepo: 'sureshkansujiya_java',
+                    snapshotRepo: 'sureshkansujiya_java'
                 )
                 rtMavenRun (
                     pom: 'pom.xml',
@@ -79,14 +79,14 @@ pipeline
 		{
 			steps
 			{
-				sh returnStdout: true, script: '/bin/docker build -t dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya:${BUILD_NUMBER} -f Dockerfile .'
+				sh returnStdout: true, script: '/bin/docker build -t dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java:${BUILD_NUMBER} -f Dockerfile .'
 			}
 		}
 		stage ('Push to DTR')
 	    {
 		    steps
 		    {
-		    	sh returnStdout: true, script: '/bin/docker push dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya:${BUILD_NUMBER}'
+		    	sh returnStdout: true, script: '/bin/docker push dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java:${BUILD_NUMBER}'
 		    }
 	    }
         stage ('Stop Running container')
@@ -108,7 +108,7 @@ pipeline
 		{
 		    steps
 		    {
-		        sh 'docker run --name devopssampleapplication_charugarg -d -p 7016:8080 dtr.nagarro.com:443/devopssampleapplication_charugarg:${BUILD_NUMBER}'
+		        sh 'docker run --name devopssampleapplication_sureshkansujiya_java -d -p 7015:8080 dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java:${BUILD_NUMBER}'
 		    }
 		}
 	}
@@ -116,7 +116,7 @@ pipeline
 	{
         always 
 		{
-			emailext attachmentsPattern: 'report.html', body: '${JELLY_SCRIPT,template="health"}', mimeType: 'text/html', recipientProviders: [[$class: 'RequesterRecipientProvider']], replyTo: 'charu.garg@nagarro.com', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'charu.garg@nagarro.com'
+			emailext attachmentsPattern: 'report.html', body: '${JELLY_SCRIPT,template="health"}', mimeType: 'text/html', recipientProviders: [[$class: 'RequesterRecipientProvider']], replyTo: 'suresh.kansujiya@nagrro.com', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'suresh.kansujiya@nagrro.com'
         }
     }
 }
