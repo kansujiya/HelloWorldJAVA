@@ -62,8 +62,8 @@ pipeline
 				rtMavenDeployer (
                     id: 'deployer',
                     serverId: '123456789@artifactory',
-                    releaseRepo: 'sureshkansujiya_java',
-                    snapshotRepo: 'sureshkansujiya_java'
+                    releaseRepo: 'sureshkansujiya_java_assign',
+                    snapshotRepo: 'sureshkansujiya_java_assign'
                 )
                 rtMavenRun (
                     pom: 'pom.xml',
@@ -79,14 +79,14 @@ pipeline
 		{
 			steps
 			{
-				sh returnStdout: true, script: '/bin/docker build -t dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java:${BUILD_NUMBER} -f Dockerfile .'
+				sh returnStdout: true, script: '/bin/docker build -t dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java_assign:${BUILD_NUMBER} -f Dockerfile .'
 			}
 		}
 		stage ('Push to DTR')
 	    {
 		    steps
 		    {
-		    	sh returnStdout: true, script: '/bin/docker push dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java:${BUILD_NUMBER}'
+		    	sh returnStdout: true, script: '/bin/docker push dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java_assign:${BUILD_NUMBER}'
 		    }
 	    }
         stage ('Stop Running container')
