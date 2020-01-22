@@ -82,13 +82,18 @@ pipeline
 				sh returnStdout: true, script: '/Applications/Docker.app/Contents/Resources/bin/docker build -t sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER} -f Dockerfile .'
 			}
 		}
-		stage ('Push to DTR')
-	    {
-		    steps
-		    {
-		    	sh returnStdout: true, script: '/Applications/Docker.app/Contents/Resources/bin/docker push sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER}'
-		    }
-	    }
+
+        stage('Push image') {
+                withCredentials([usernamePassword( credentialsId: 'docker-hub-credentials', usernameVariable: 'sureshkansujiya', passwordVariable: '9462039286S')]) {
+                    def registry_url = "registry.hub.docker.com/"
+                    bat "docker login -u $USER -p $PASSWORD ${registry_url}"
+                    docker.withRegistry("http://${registry_url}", "docker-hub-credentials") {
+                    // Push your image now
+                    sh returnStdout: true, script: '/Applications/Docker.app/Contents/Resources/bin/docker push sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER}'
+                    }
+                }
+            }
+
         stage ('Stop Running container')
     	{
 	        steps
