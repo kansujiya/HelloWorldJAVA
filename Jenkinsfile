@@ -83,7 +83,7 @@ pipeline
 			}
 		}
 
-        stage ('Push to DTR')
+        stage ('Push to DockerHub')
 	    {
 		    steps
 		    {
