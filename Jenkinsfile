@@ -97,11 +97,11 @@ pipeline
 	        steps
 	        {
 	            sh '''
-                    ContainerID=$(docker ps | grep 7015 | cut -d " " -f 1)
+                    ContainerID=$(/Applications/Docker.app/Contents/Resources/bin/docker ps | grep 7015 | cut -d " " -f 1)
                     if [  $ContainerID ]
                     then
-                        docker stop $ContainerID
-                        docker rm -f $ContainerID
+                        /Applications/Docker.app/Contents/Resources/bin/docker stop $ContainerID
+                        /Applications/Docker.app/Contents/Resources/bin/docker rm -f $ContainerID
                     fi
                 '''
 	        }
