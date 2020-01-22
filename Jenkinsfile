@@ -87,6 +87,7 @@ pipeline
 	    {
 		    steps
 		    {
+			sh '/Applications/Docker.app/Contents/Resources/bin/docker login -u "sureshkansujiya" -p "9462039286S" docker.io'
 		    	sh returnStdout: true, script: '/Applications/Docker.app/Contents/Resources/bin/docker push sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER}'
 		    }
 	    }
@@ -110,7 +111,7 @@ pipeline
 		{
 		    steps
 		    {
-		        sh 'docker run --name devopssampleapplication_sureshkansujiya_java_assign -d -p 7015:8080 sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER}'
+		        sh '/Applications/Docker.app/Contents/Resources/bin/docker run --name devopssampleapplication_sureshkansujiya_java_assign -d -p 7015:8080 sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER}'
 		    }
 		}
 	}
