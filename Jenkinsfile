@@ -79,7 +79,7 @@ pipeline
 		{
 			steps
 			{
-				sh returnStdout: true, script: 'docker build -t sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER} -f Dockerfile .'
+				sh returnStdout: true, script: '/Applications/Docker.app/Contents/Resources/bin/docker build -t sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER} -f Dockerfile .'
 			}
 		}
 		stage ('Push to DTR')
