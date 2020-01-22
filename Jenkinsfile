@@ -86,7 +86,7 @@ pipeline
 	    {
 		    steps
 		    {
-		    	sh returnStdout: true, script: '/bin/docker push dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java_assign:${BUILD_NUMBER}'
+		    	sh returnStdout: true, script: '/Applications/Docker.app/Contents/Resources/bin/docker push sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER}'
 		    }
 	    }
         stage ('Stop Running container')
@@ -108,7 +108,7 @@ pipeline
 		{
 		    steps
 		    {
-		        sh 'docker run --name devopssampleapplication_sureshkansujiya_java -d -p 7015:8080 dtr.nagarro.com:443/devopssampleapplication_sureshkansujiya_java:${BUILD_NUMBER}'
+		        sh 'docker run --name devopssampleapplication_sureshkansujiya_java_assign -d -p 7015:8080 sureshkansujiya/dtr.javasample.suresh:${BUILD_NUMBER}'
 		    }
 		}
 	}
